@@ -1,0 +1,16 @@
+[2025-07-13 16:01:04,020] 13 root - INFO - ====================TRAINING PIPELINE LOGGING STARTED====================
+[2025-07-13 16:01:04,020] 32 root - INFO - Entered the run_pipeline method of TrainPipeline class
+[2025-07-13 16:01:04,020] 19 root - INFO - Entered the start_data_ingestion method of TrainPipeline class
+[2025-07-13 16:01:04,020] 21 root - INFO - Getting the data from GCloud storage bucket
+[2025-07-13 16:01:04,020] 46 root - INFO - Entered the initiate_data_ingestion method of DataIngestion class
+[2025-07-13 16:01:04,020] 17 root - INFO - Entered the get_data_from_gcloud method of DataIngestion class
+[2025-07-13 16:07:00,020] 25 root - INFO - Exited the get_data_from_gcloud method of DataIngestion class
+[2025-07-13 16:07:00,021] 49 root - INFO - Fetched the data from gcloud bucket
+[2025-07-13 16:07:00,021] 32 root - INFO - Entered the unzip_and_clean method of DataIngestion class
+[2025-07-13 16:07:00,100] 37 root - INFO - Exited the unzip_and_clean method of DataIngestion class
+[2025-07-13 16:07:00,100] 51 root - INFO - Unzipped and cleaned the data and split into train and valid
+[2025-07-13 16:07:00,101] 55 root - INFO - Exited the initiate_data_ingestion method of DataIngestion class
+[2025-07-13 16:07:00,101] 56 root - INFO - Data ingestion artifacts: DataIngestionArtifacts(imbalance_data_file_path='A:\\NLP-project\\Hate-text-classification\\artifacts\\07_13_2025_16_01_04\\dataIngestionArtifacts\\imbalanced_data.csv', raw_data_file_path='A:\\NLP-project\\Hate-text-classification\\artifacts\\07_13_2025_16_01_04\\dataIngestionArtifacts')
+[2025-07-13 16:07:00,101] 24 root - INFO - Got the data from GCloud storage bucket
+[2025-07-13 16:07:00,102] 25 root - INFO - Exited the start_data_ingestion method of TrainPipeline class
+[2025-07-13 16:07:00,102] 35 root - INFO - Exited the run_pipeline method of TrainPipeline class
