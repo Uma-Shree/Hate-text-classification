@@ -10,5 +10,5 @@ from-root
 google-cloud-storage
 fastapi
 uvicorn
-Jinja
+Jinja2
 -e .

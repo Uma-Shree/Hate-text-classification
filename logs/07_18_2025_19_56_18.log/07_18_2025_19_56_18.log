@@ -1,0 +1,21 @@
+[2025-07-18 19:56:19,592] 164 numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+[2025-07-18 19:56:24,218] 14 root - INFO - ====================TRAINING PIPELINE LOGGING STARTED====================
+[2025-07-18 19:56:24,219] 50 root - INFO - Entered the run_pipeline method of TrainPipeline class
+[2025-07-18 19:56:24,219] 22 root - INFO - Entered the start_data_ingestion method of TrainPipeline class
+[2025-07-18 19:56:24,219] 24 root - INFO - Getting the data from GCloud storage bucket
+[2025-07-18 19:56:24,219] 46 root - INFO - Entered the initiate_data_ingestion method of DataIngestion class
+[2025-07-18 19:56:24,219] 17 root - INFO - Entered the get_data_from_gcloud method of DataIngestion class
+[2025-07-18 19:56:36,038] 25 root - INFO - Exited the get_data_from_gcloud method of DataIngestion class
+[2025-07-18 19:56:36,038] 49 root - INFO - Fetched the data from gcloud bucket
+[2025-07-18 19:56:36,038] 32 root - INFO - Entered the unzip_and_clean method of DataIngestion class
+[2025-07-18 19:56:36,096] 37 root - INFO - Exited the unzip_and_clean method of DataIngestion class
+[2025-07-18 19:56:36,096] 51 root - INFO - Unzipped and cleaned the data and split into train and valid
+[2025-07-18 19:56:36,096] 55 root - INFO - Exited the initiate_data_ingestion method of DataIngestion class
+[2025-07-18 19:56:36,097] 56 root - INFO - Data ingestion artifacts: DataIngestionArtifacts(imbalance_data_file_path='A:\\NLP-project\\Hate-text-classification\\artifacts\\07_18_2025_19_56_18\\dataIngestionArtifacts\\imbalanced_data.csv', raw_data_file_path='A:\\NLP-project\\Hate-text-classification\\artifacts\\07_18_2025_19_56_18\\dataIngestionArtifacts')
+[2025-07-18 19:56:36,097] 27 root - INFO - Got the data from GCloud storage bucket
+[2025-07-18 19:56:36,097] 28 root - INFO - Exited the start_data_ingestion method of TrainPipeline class
+[2025-07-18 19:56:36,097] 34 root - INFO - 
+[2025-07-18 19:56:36,097] 94 root - INFO - Entered the initiate_data_transformation method of Data transformation class
+[2025-07-18 19:56:36,097] 22 root - INFO - Entering into imbalance_data_cleaning method of DataTransformation class
+[2025-07-18 19:56:36,217] 25 root - INFO - Exiting from imbalance_data_cleaning method of DataTransformation class and return {imbalance_data}
+[2025-07-18 19:56:36,220] 33 root - INFO - Entering into raw_data_cleaning method of DataTransformation class
