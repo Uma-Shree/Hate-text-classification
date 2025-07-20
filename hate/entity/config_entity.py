@@ -5,11 +5,11 @@ import os
 @dataclass
 class DataIngestionConfig:
     def __init__(self):
-        self.BUCKET_NAME = BUCKET_NAME
-        self.ZIP_FILE_NAME = ZIP_FILE_NAME
+        self.BUCKET_NAME: str= BUCKET_NAME
+        self.ZIP_FILE_NAME : str = ZIP_FILE_NAME
         self.DATA_INGESTION_ARTIFACTS_DIR : str = os.path.join(os.getcwd(), ARTIFACTS_DIR, DATA_INGESTION_ARTIFACTS_DIR)
         self.DATA_ARTIFACTS_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR, DATA_INGESTION_IMBALANCE_DATA_DIR)
-        self.NEW_DATA_ARTIFACTS_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR)
+        self.NEW_DATA_ARTIFACTS_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR, DATA_INGESTION_RAW_DATA_DIR)
         self.ZIP_FILE_DIR = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR)
         self.ZIP_FILE_PATH = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR, self.ZIP_FILE_NAME)
 
@@ -22,7 +22,7 @@ class DataTransformationConfig:
         self.ID = ID
         self.AXIS = AXIS
         self.INPLACE = INPLACE
-        self.DROP_COLLUMNS = DROP_COLUMNS
+        self.DROP_COLUMNS = DROP_COLUMNS
         self.CLASS = CLASS
         self.LABEL = LABEL
         self.TWEET = TWEET

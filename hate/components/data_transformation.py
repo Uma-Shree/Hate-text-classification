@@ -23,7 +23,7 @@ class DataTransformation:
             logging.info("Entering into imbalance_data_cleaning method of DataTransformation class")
             imbalance_data = pd.read_csv(self.data_ingestion_artifacts.imbalance_data_file_path)
             imbalance_data.drop(self.data_transformation_config.ID, axis = self.data_transformation_config.AXIS, inplace = self.data_transformation_config.INPLACE)
-            logging.info("Exiting from imbalance_data_cleaning method of DataTransformation class and return {imbalance_data}")
+            logging.info(f"Exiting from imbalance_data_cleaning method of DataTransformation class and return {imbalance_data}")
 
             return imbalance_data
         except Exception as e:
@@ -35,7 +35,7 @@ class DataTransformation:
         try:
             logging.info("Entered into the raw_data_cleaning function")
             raw_data = pd.read_csv(self.data_ingestion_artifacts.raw_data_file_path)
-            raw_data.drop(self.data_transformation_config.DROP_COLUMNS,axis = self.data_transformation_config.AXIS,
+            raw_data.drop(self.data_transformation_config.DROP_COLUMNS, axis = self.data_transformation_config.AXIS,
             inplace = self.data_transformation_config.INPLACE)
 
             raw_data[raw_data[self.data_transformation_config.CLASS]==0][self.data_transformation_config.CLASS]=1
@@ -126,10 +126,10 @@ class DataTransformation:
 
             df[self.data_transformation_config.TWEET] = df[self.data_transformation_config.TWEET].apply(self.concat_data_cleaning)
             os.makedirs(self.data_transformation_config.DATA_TRANSFORMATION_ARTIFACTS_DIR, exist_ok = True)
-            df.to_csv(self.data_transformation_config.TRANSFORMED_FILE_PATH, index = False, header = True)
+            df.to_csv(self.data_transformation_config.TANSFORMED_FILE_PATH, index = False, header = True)
 
             data_transformation_artifact = DataTransformationArtifacts(
-            transformed_data_path = self.data_transformation_config.TRANSFORMED_FILE_PATH
+            transformed_data_path = self.data_transformation_config.TANSFORMED_FILE_PATH
             )
 
             logging.info("returning the DataTransformationArtifacts")
