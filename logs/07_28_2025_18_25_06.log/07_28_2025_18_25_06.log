@@ -1,0 +1,6 @@
+[2025-07-28 18:25:07,973] 161 numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+[2025-07-28 18:25:18,668] 34 tensorflow - DEBUG - Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+[2025-07-28 18:25:21,001] 47 h5py._conv - DEBUG - Creating converter from 7 to 5
+[2025-07-28 18:25:21,002] 47 h5py._conv - DEBUG - Creating converter from 5 to 7
+[2025-07-28 18:25:21,002] 47 h5py._conv - DEBUG - Creating converter from 7 to 5
+[2025-07-28 18:25:21,002] 47 h5py._conv - DEBUG - Creating converter from 5 to 7
