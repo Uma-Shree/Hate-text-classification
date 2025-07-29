@@ -39,7 +39,7 @@ Y_TEST_FILE_NAME = 'y_test.csv'
 X_TRAIN_FILE_NAME = 'x_train.csv'
 
 RANDOM_STATE = 42
-EPOCH = 12 #take more than 1
+EPOCH = 1 #take more than 1
 BATCH_SIZE = 128
 VALIDATION_SPLIT = 0.2
 
@@ -50,3 +50,11 @@ LOSS = 'binary_crossentropy'
 METRICS = ['accuracy']
 ACTIVATION = 'sigmoid'
 
+#Model Evaluation related constants
+MODEL_EVALUATION_ARTIFACTS_DIR = 'ModelEvaluationArtifacts'
+BEST_MODEL_DIR = 'best_model'
+MODEL_EVALUATION_FILE_NAME = 'loss.csv'
+
+MODEL_NAME = 'model.h5'
+App_HOST = '0.0.0.0'
+APP_PORT = 8080

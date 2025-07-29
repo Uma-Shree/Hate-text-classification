@@ -8,6 +8,7 @@ from hate.exception import CustomException
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.utils import pad_sequences
+from tensorflow.keras.callbacks import EarlyStopping
 
 from hate.entity.config_entity import ModelTrainerConfig
 from hate.entity.artifact_entity import ModelTrainerArtifacts, DataTransformationArtifacts
@@ -151,13 +152,21 @@ class ModelTrainer:
 
             sequences_matrix, tokenizer = self.tokenizing(X_train)
 
+            early_stopping = EarlyStopping(
+                monitor = 'val_loss',
+                patience = 3, #wait util 3 epoch
+                restore_best_weights = True,
+                verbose = 1
+            )
             logging.info("Entering the model training")
             model.fit(sequences_matrix,
                       y_train,
                       batch_size=self.model_trainer_config.BATCH_SIZE, 
                       epochs = self.model_trainer_config.EPOCH,
                       validation_split = self.model_trainer_config.VALIDATION_SPLIT,
+                      callbacks = [early_stopping]
                       )
+            print(model.summary())
             logging.info("Exited the model training")
 
             with open('tokenizer.pickle', 'wb') as handle:
