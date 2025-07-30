@@ -58,3 +58,6 @@ MODEL_EVALUATION_FILE_NAME = 'loss.csv'
 MODEL_NAME = 'model.h5'
 App_HOST = '0.0.0.0'
 APP_PORT = 8080
+
+
+#Model pusher related constants

@@ -6,16 +6,19 @@ from hate.components.data_ingestion import DataIngestion
 from hate.components.data_transformation import DataTransformation
 from hate.components.model_trainer import ModelTrainer
 from hate.components.model_evaluation import ModelEvaluation
+from hate.components.model_pusher import ModelPusher
 
 from hate.entity.config_entity import (DataIngestionConfig, 
                                        DataTransformationConfig, 
                                        ModelTrainerConfig,
-                                       ModelEvaluationConfig)
+                                       ModelEvaluationConfig,
+                                       ModelPusherConfig)
 
 from hate.entity.artifact_entity import (DataIngestionArtifacts, 
                                          DataTransformationArtifacts, 
                                          ModelTrainerArtifacts,
-                                         ModelEvaluationArtifacts)
+                                         ModelEvaluationArtifacts,
+                                         ModelPusherArtifacts)
 
 
 
@@ -29,6 +32,7 @@ class TrainPipeline:
             self.data_transformation_config = DataTransformationConfig()
             self.model_trainer_config = ModelTrainerConfig()
             self.model_evaluation_config = ModelEvaluationConfig()
+            self.model_pusher_config = ModelPusherConfig()
             
 
 
@@ -90,6 +94,21 @@ class TrainPipeline:
         except Exception as e:
             raise CustomException(e, sys) from e
 
+    def start_model_pusher(self, ) -> ModelPusherArtifacts:
+        logging.info("Entered the start_model_pusher")
+        try:
+            model_pusher = ModelPusher(
+                model_pusher_config = self.model_pusher_config,
+            )
+
+            model_pusher_artifact = model_pusher.initiate_model_pusher()
+            logging.info("Initiated the model pusher")
+            logging.info("Exited the start_model_pusher method of TrainPipeline class")
+            return model_pusher_artifact
+        except Exception as e:
+            raise CustomException(e, sys) from e
+        
+
     def run_pipeline(self):
         logging.info("Entered the run_pipeline method of TrainPipeline class")
         try:
@@ -110,6 +129,8 @@ class TrainPipeline:
 
             if not model_evaluation_artifacts.is_model_accepted:
                 raise Exception("Trained model is not better than the best model")
+            
+            model_pusher_artifact = self.start_model_pusher()
             
             logging.info("Exited the run_pipeline method of TrainPipeline class")
 
