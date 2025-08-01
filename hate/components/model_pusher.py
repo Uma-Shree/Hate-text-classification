@@ -26,8 +26,8 @@ class ModelPusher:
                 bucket_name = self.model_pusher_config.BUCKET_NAME
                 
             )
-            logging.info(f"Model pusher artifacts: {model_pusher_artifacts}")
-            logging.info("Exited initiate_model_pusher method of ModelPusher class")
+            #logging.info(f"Model pusher artifacts: {model_pusher_artifacts}")
+            #logging.info("Exited initiate_model_pusher method of ModelPusher class")
             
             return model_pusher_artifacts
         

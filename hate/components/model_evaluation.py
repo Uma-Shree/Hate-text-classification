@@ -5,10 +5,11 @@ import pickle
 import numpy as np
 import pandas as pd
 from keras.utils import pad_sequences
+from keras.models import load_model
 from hate.logger import logging
 from hate.exception import CustomException
 from hate.constants import *
-from hate.configuation.gcloud_syncer import GCloudSync
+from hate.configuration.gcloud_syncer import GCloudSync
 from sklearn.metrics import confusion_matrix
 from hate.entity.config_entity import ModelEvaluationConfig
 from hate.entity.artifact_entity import ModelEvaluationArtifacts, ModelTrainerArtifacts, DataTransformationArtifacts
@@ -30,7 +31,7 @@ class ModelEvaluation:
         self.gcloud = GCloudSync()
 
     
-    def best_model_from_gcloud(self) -> str:
+    def get_best_model_from_gcloud(self) -> str:
         """
             fetch best model from gcloud storage and store inside best model directory path
 
@@ -46,7 +47,7 @@ class ModelEvaluation:
                                                 self.model_evaluation_config.BEST_MODEL_DIR_PATH)
             
             best_model_path = os.path.join(self.model_evaluation_config.BEST_MODEL_DIR_PATH,
-                                           self.model_evaluaition_config.MODEL_NAME)
+                                           self.model_evaluation_config.MODEL_NAME)
             
             logging.info("Exited best_model_from_gcloud method of model evaluation component")
 
@@ -65,9 +66,9 @@ class ModelEvaluation:
         try:
             logging.info("Entered evaluate method of model evaluation component")
 
-            print(self.model__trainer_artifacts.x_test_path)
+            print(self.model_trainer_artifacts.X_test_path)
 
-            x_test = pd.read_csv(self.model_trainer_artifacts.x_test_path, index_col = 0)
+            x_test = pd.read_csv(self.model_trainer_artifacts.X_test_path, index_col = 0)
             print(x_test)
             y_test = pd.read_csv(self.model_trainer_artifacts.y_test_path, index_col = 0)
 
@@ -132,7 +133,7 @@ class ModelEvaluation:
             logging.info("check if the best model present in the gcloud or not?")
 
             if os.path.isfile(best_model_path) is False:
-                is_model_accepted = Truel
+                is_model_accepted = True
 
                 logging.info("gcloud storage model is false and currently trained model accepted is true")
 

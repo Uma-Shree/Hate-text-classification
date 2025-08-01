@@ -1,0 +1,18 @@
+[2025-07-31 01:19:22,540] 161 numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+[2025-07-31 01:19:29,633] 34 tensorflow - DEBUG - Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+[2025-07-31 01:19:30,796] 47 h5py._conv - DEBUG - Creating converter from 7 to 5
+[2025-07-31 01:19:30,796] 47 h5py._conv - DEBUG - Creating converter from 5 to 7
+[2025-07-31 01:19:30,796] 47 h5py._conv - DEBUG - Creating converter from 7 to 5
+[2025-07-31 01:19:30,796] 47 h5py._conv - DEBUG - Creating converter from 5 to 7
+[2025-07-31 01:19:32,968] 342 matplotlib - DEBUG - matplotlib data path: C:\Users\chand\anaconda3\Lib\site-packages\matplotlib\mpl-data
+[2025-07-31 01:19:32,979] 342 matplotlib - DEBUG - CONFIGDIR=C:\Users\chand\.matplotlib
+[2025-07-31 01:19:32,981] 1557 matplotlib - DEBUG - interactive is False
+[2025-07-31 01:19:32,982] 1558 matplotlib - DEBUG - platform is win32
+[2025-07-31 01:19:33,078] 342 matplotlib - DEBUG - CACHEDIR=C:\Users\chand\.matplotlib
+[2025-07-31 01:19:33,087] 1635 matplotlib.font_manager - DEBUG - Using fontManager instance from C:\Users\chand\.matplotlib\fontlist-v390.json
+[2025-07-31 01:19:34,472] 30 root - INFO - ====================TRAINING PIPELINE LOGGING STARTED====================
+[2025-07-31 01:19:34,472] 113 root - INFO - Entered the run_pipeline method of TrainPipeline class
+[2025-07-31 01:19:34,473] 43 root - INFO - Entered the start_data_ingestion method of TrainPipeline class
+[2025-07-31 01:19:34,473] 45 root - INFO - Getting the data from GCloud storage bucket
+[2025-07-31 01:19:34,473] 46 root - INFO - Entered the initiate_data_ingestion method of DataIngestion class
+[2025-07-31 01:19:34,473] 17 root - INFO - Entered the get_data_from_gcloud method of DataIngestion class

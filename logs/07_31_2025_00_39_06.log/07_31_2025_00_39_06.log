@@ -1,0 +1,12 @@
+[2025-07-31 00:40:11,307] 161 numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+[2025-07-31 00:40:24,650] 34 tensorflow - DEBUG - Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+[2025-07-31 00:40:26,810] 47 h5py._conv - DEBUG - Creating converter from 7 to 5
+[2025-07-31 00:40:26,810] 47 h5py._conv - DEBUG - Creating converter from 5 to 7
+[2025-07-31 00:40:26,810] 47 h5py._conv - DEBUG - Creating converter from 7 to 5
+[2025-07-31 00:40:26,810] 47 h5py._conv - DEBUG - Creating converter from 5 to 7
+[2025-07-31 00:40:31,339] 342 matplotlib - DEBUG - matplotlib data path: C:\Users\chand\anaconda3\Lib\site-packages\matplotlib\mpl-data
+[2025-07-31 00:40:31,358] 342 matplotlib - DEBUG - CONFIGDIR=C:\Users\chand\.matplotlib
+[2025-07-31 00:40:31,363] 1557 matplotlib - DEBUG - interactive is False
+[2025-07-31 00:40:31,364] 1558 matplotlib - DEBUG - platform is win32
+[2025-07-31 00:40:31,509] 342 matplotlib - DEBUG - CACHEDIR=C:\Users\chand\.matplotlib
+[2025-07-31 00:40:31,537] 1635 matplotlib.font_manager - DEBUG - Using fontManager instance from C:\Users\chand\.matplotlib\fontlist-v390.json
