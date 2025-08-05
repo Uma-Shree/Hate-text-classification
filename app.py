@@ -1,7 +1,7 @@
 from hate.pipeline.train_pipeline import TrainPipeline
 from fastapi import FastAPI
 import uvicorn
-import sysfrom 
+import sys 
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
 from fastapi.responses import Response
