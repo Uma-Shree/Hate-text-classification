@@ -61,3 +61,8 @@ APP_PORT = 8080
 
 
 #Model pusher related constants
+
+# Add hyperparameter tuning constants
+HYPERPARAMETER_TUNING = True
+MAX_TRIALS = 4
+EXECUTIONS_PER_TRIAL = 1

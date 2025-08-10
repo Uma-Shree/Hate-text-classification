@@ -46,6 +46,11 @@ class ModelTrainerConfig:
         self.EPOCH = EPOCH
         self.BATCH_SIZE = BATCH_SIZE
         self.VALIDATION_SPLIT = VALIDATION_SPLIT
+        self.HYPERPARAMETER_TUNING = True
+        self.MAX_TRIALS = 10
+        self.EXECUTIONS_PER_TRIAL = 1
+        self.TUNER_DIRECTORY = os.path.join(self.TRAINED_MODEL_DIR, 'hyperparameter_tuning')
+        self.TUNER_PROJECT_NAME = 'hate_speech_tuning'
 
 
 @dataclass

@@ -1,0 +1,2 @@
+[2025-08-05 16:22:40,338] 161 numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+[2025-08-05 16:22:47,403] 34 tensorflow - DEBUG - Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.

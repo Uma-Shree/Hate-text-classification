@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.utils import pad_sequences
 from tensorflow.keras.callbacks import EarlyStopping
+import keras_tuner as kt
 
 from hate.entity.config_entity import ModelTrainerConfig
 from hate.entity.artifact_entity import ModelTrainerArtifacts, DataTransformationArtifacts
@@ -20,7 +21,7 @@ class ModelTrainer:
         
             self.data_transformation_artifacts = data_transformation_artifacts
             self.model_trainer_config = model_trainer_config
-           
+          
         
     def spliting_data(self, csv_path):
         try:
@@ -67,7 +68,7 @@ class ModelTrainer:
         try:
             logging.info("Tokenizing the data")
         
-            # === DATA VALIDATION ===
+            #DATA VALIDATION
             print("=== DATA VALIDATION ===")
             print(f"Original data shape: {X_train.shape}")
             print(f"Data type: {type(X_train)}")
@@ -87,7 +88,7 @@ class ModelTrainer:
             non_string_count = sum(1 for x in X_train if not isinstance(x, str) and pd.notna(x))
             print(f"Non-string values count: {non_string_count}")
         
-            # === DATA CLEANING ===
+            #DATA CLEANING
             logging.info("Cleaning data before tokenization")
         
             # Convert to pandas Series if not already
@@ -127,48 +128,91 @@ class ModelTrainer:
         except Exception as e:
             raise CustomException(e, sys) from e
 
+    def hyperparameter_tuning(self, sequences_matrix, y_train):
+        """Perform hyperparameter tuning"""
+        try:
+            logging.info("Starting hyperparameter tuning")
+            
+            model_architecture = ModelArchitecture()
+            
+            # Create tuner
+            tuner = kt.RandomSearch(
+                model_architecture.build_model,
+                objective='val_accuracy',
+                max_trials=self.model_trainer_config.MAX_TRIALS,
+                executions_per_trial=self.model_trainer_config.EXECUTIONS_PER_TRIAL,
+                directory=self.model_trainer_config.TUNER_DIRECTORY,
+                project_name=self.model_trainer_config.TUNER_PROJECT_NAME
+            )
+            
+            # Early stopping for tuning
+            early_stopping = EarlyStopping(
+                monitor='val_loss',
+                patience=3,
+                restore_best_weights=True,
+                verbose=1
+            )
+            
+            # Search for best hyperparameters
+            tuner.search(
+                sequences_matrix, y_train,
+                epochs=self.model_trainer_config.EPOCH,
+                validation_split=self.model_trainer_config.VALIDATION_SPLIT,
+                callbacks=[early_stopping],
+                verbose=1
+            )
+            
+            # Get best model
+            best_model = tuner.get_best_models(num_models=1)[0]
+            best_hyperparameters = tuner.get_best_hyperparameters(num_trials=1)[0]
+            
+            logging.info(f"Best hyperparameters: {best_hyperparameters.values}")
+            
+            return best_model, best_hyperparameters
+            
+        except Exception as e:
+            raise CustomException(e, sys) from e
 
-    def initiate_model_trainer(self,) -> ModelTrainerArtifacts:
-        logging.info("Entered the initiate_model_trainer method of ModelTrainer class")
-
-        """
-        Method Name: initiate_model_trainer
-        Description: This method initiates the model trainer steps
-        
-        Output : Returns model trainer artifacts
-        On Failure: Raise exception
-        """
-
+    def initiate_model_trainer(self) -> ModelTrainerArtifacts:
         try:
             logging.info("Entered the initiate_model_trainer method of ModelTrainer class")
 
-            X_train, X_test, y_train, y_test = self.spliting_data(csv_path= self.data_transformation_artifacts.transformed_data_path)
-            model_architecture = ModelArchitecture()
-            model = model_architecture.get_model()
-
-            logging.info(f"X_train size is: {X_train.shape}")
-            logging.info(f"y_train size is: {y_train.shape}")
-            
-
-            sequences_matrix, tokenizer = self.tokenizing(X_train)
-
-            early_stopping = EarlyStopping(
-                monitor = 'val_loss',
-                patience = 3, #wait util 3 epoch
-                restore_best_weights = True,
-                verbose = 1
+            X_train, X_test, y_train, y_test = self.spliting_data(
+                csv_path=self.data_transformation_artifacts.transformed_data_path
             )
-            logging.info("Entering the model training")
-            model.fit(sequences_matrix,
-                      y_train,
-                      batch_size=self.model_trainer_config.BATCH_SIZE, 
-                      epochs = self.model_trainer_config.EPOCH,
-                      validation_split = self.model_trainer_config.VALIDATION_SPLIT,
-                      callbacks = [early_stopping]
-                      )
-            print(model.summary())
-            logging.info("Exited the model training")
-
+            
+            sequences_matrix, tokenizer = self.tokenizing(X_train)
+            
+            if self.model_trainer_config.HYPERPARAMETER_TUNING:
+                # Use hyperparameter tuning
+                model, best_hyperparameters = self.hyperparameter_tuning(sequences_matrix, y_train)
+                
+                # Save hyperparameters
+                hyperparams_path = os.path.join(self.model_trainer_config.TRAINED_MODEL_DIR, 'best_hyperparameters.json')
+                with open(hyperparams_path, 'w') as f:
+                    import json
+                    json.dump(best_hyperparameters.values, f, indent=2)
+                    
+            else:
+                # Use default model
+                model_architecture = ModelArchitecture()
+                model = model_architecture.get_model()
+                
+                early_stopping = EarlyStopping(
+                    monitor='val_loss',
+                    patience=3,
+                    restore_best_weights=True,
+                    verbose=1
+                )
+                
+                model.fit(
+                    sequences_matrix, y_train,
+                    batch_size=self.model_trainer_config.BATCH_SIZE,
+                    epochs=self.model_trainer_config.EPOCH,
+                    validation_split=self.model_trainer_config.VALIDATION_SPLIT,
+                    callbacks=[early_stopping]
+                )
+            
             with open('tokenizer.pickle', 'wb') as handle:
                 pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
             
