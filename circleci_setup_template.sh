@@ -36,9 +36,3 @@ workflows:
     jobs:
       - test-and-train
 EOF
-
-echo "CircleCI configuration created at .circleci/config.yml"
-echo "Next steps:"
-echo "1. Commit this configuration to your repository"
-echo "2. Connect your repository to CircleCI"
-echo "3. Configure environment variables if needed"
